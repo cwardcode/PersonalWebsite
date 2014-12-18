@@ -1,0 +1,258 @@
+<!DOCTYPE HTML>
+<!--
+	ZeroFour 1.0 by HTML5 Up!
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>SlidingFrenzy - Projects - C. Ward Code</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="Information about SlidingFrenzy" />
+		<meta name="keywords" content="SlidingFrenzy, Google, Android, GooglePlay, game, sliding, puzzle" />
+		<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,700,800" rel="stylesheet" type="text/css" />
+		<script src="js/jquery-1.8.3.min.js"></script>
+		<script src="css/5grid/init.js?use=mobile,desktop,1000px&amp;mobileUI=1&amp;mobileUI.theme=none"></script>
+		<script src="js/jquery.dropotron-1.2.js"></script>
+		<script src="js/init.js"></script>
+		<script src="js/init.js"></script>
+        <link rel="stylesheet" type="text/css" href="js/shadowbox.css">
+        <script type="text/javascript" src="js/shadowbox.js"></script>
+        <script type="text/javascript">
+            Shadowbox.init();
+        </script>
+        <noscript>
+			<link rel="stylesheet" href="css/5grid/core.css" />
+			<link rel="stylesheet" href="css/5grid/core-desktop.css" />
+			<link rel="stylesheet" href="css/5grid/core-1200px.css" />
+			<link rel="stylesheet" href="css/5grid/core-noscript.css" />
+			<link rel="stylesheet" href="css/style.css" />
+			<link rel="stylesheet" href="css/style-desktop.css" />
+		</noscript>
+		<!--[if lte IE 9]><link rel="stylesheet" href="css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="css/ie8.css" /><![endif]-->
+		<!--[if lte IE 7]><link rel="stylesheet" href="css/ie7.css" /><![endif]-->
+<script>
+var _prum = [['id', '519c9234abe53d5d49000000'],
+             ['mark', 'firstbyte', (new Date()).getTime()]];
+(function() {
+    var s = document.getElementsByTagName('script')[0]
+      , p = document.createElement('script');
+    p.async = 'async';
+    p.src = '//rum-static.pingdom.net/prum.min.js';
+    s.parentNode.insertBefore(p, s);
+})();
+</script>
+    
+	</head>
+	<body class="left-sidebar">
+
+		<!-- Header Wrapper -->
+			<div id="header-wrapper">
+				<div class="5grid-layout">
+					<div class="row">
+						<div class="12u">
+						
+							<!-- Header -->
+                             <header id="header">
+									<div class="inner">
+									
+										<!-- Logo -->
+											<h1><a href="/" class="mobileUI-site-name">C. Ward Code</a></h1>
+										
+										<!-- Nav -->
+											<nav id="nav" class="mobileUI-site-nav">
+												<ul>
+													<li class="current_page_item"><a href="/">Home</a></li>
+													<li>
+														<a href="/courses/" class="arrow">Current Courses</a>
+														<ul>
+															<li><a href="/courses/495.html">Capstone</a></li>
+															<li><a href="/courses/351.html">Data Structures & Algs</a></li>
+														</ul>
+													</li>
+                                                    <li>
+														<a href="/projects/" class="arrow">Projects</a>
+														<ul>
+																	<li><a href="/projects/catracker.html">Catracker</a></li>
+																	<li><a href="/projects/slidingfrenzy.html">Sliding Frenzy</a></li>
+														</ul>
+													</li>
+                                                    
+													<li><a href="/resume.html">Resume</a></li>
+													<li><a href="/contact.html">Contact Me</a></li>
+												</ul>
+											</nav>
+									
+									</div>
+								</header>
+
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+		
+		<!-- Main Wrapper -->
+			<div id="main-wrapper">
+				<div class="main-wrapper-style2">
+					<div class="inner">
+						<div class="5grid-layout">
+							<div class="row">
+								<div class="4u">
+									<div id="sidebar">
+
+										<!-- Sidebar -->
+									
+											<section>
+												<header class="major">
+													<h2>Android Developemnt</h2>
+												</header>
+												<p>When developing for the Android platform, more users are able to access applications
+                                                   than when using other mobile operating systems, due to Android devices holding a majority 
+                                                   of the current marketshare. Android is also a great platform to develop for, as it is based
+                                                   in Java, which is one of the most simple languages to learn!</p>
+											
+											</section>
+
+											<section>
+												<header class="major">
+													<h2>Useful Resources</h2>
+												</header>
+												<ul class="style2">
+													<li><a href="http://developer.android.com/develop/">Android Developer Portal</a></li>
+												</ul>
+											</section>
+								
+									</div>
+								</div>
+								<div class="8u mobileUI-main-content">
+									<div id="content">
+
+										<!-- Content -->
+									
+											<article>
+												<header class="major">
+													<h2>Sliding Frenzy</h2>
+													<span class="byline">An Android-OS sliding puzzle game.</span>
+												</header>
+                                                <h3>About Sliding Frenzy</h3>
+											    <p>Sliding Frenzy was one of my first Android-based application, originally created
+                                                   for my <a href="../courses/467.html">Mobile Application Development</a> course.
+                                                 . It allows players to select  one of three different sized puzzles. Player may choose 
+                                                   from either: 3x3, 6x6, or 9x9. Once chosen, the player may choose to either use the 
+                                                   default image, a new image, or a pre-existing image from their gallery. Once the game 
+                                                   starts, points are deducted from the overall score. If the player completes the puzzle, 
+                                                   they are asked if they would want their score posted to the leaderboard.</p>	
+                                                
+                                                <h3>Scoreboard Integration</h3>
+												<p>The scoreboard integration of this game was an interesting feature to integrate
+                                                   into the application. When the user visits the leaderboard, the current board is
+                                                   parsed from a file located on an external server. To upload the new score, there
+                                                   is a server-side script that takes the users score, and appends it to the server-side
+                                                   document.</p>
+
+                                                <h3>Screenshots</h3>
+                                                <script src="jbcore/juicebox.js"></script>                              
+                                                <script>                                                                
+                                                    new juicebox({                                                      
+                                                        containerId : 'juicebox-container',                             
+                                                        galleryWidth: '50%',                                            
+                                                        galleryHeight: '50%',                                           
+                                                        backgroundColor: '#222222'                                      
+                                                    });                                                                 
+                                                </script>                                                               
+                                                <div id="juicebox-container"></div>       
+                                                </article>
+                                                <h3>Download</h3>
+                                                <p>You may download this game to your android device from the following location: <a href="https://play.google.com/store/apps/details?id=edu.wcu.cs.cs467.SlidingFrenzy">Google Play</a></p>
+								
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		<!-- Footer Wrapper -->
+			<div id="footer-wrapper">
+            <footer id="footer" class="5grid-layout">
+					<div class="row">
+						<div class="3u">
+						
+							<!-- Links -->
+								<section>
+									<h2>Links of Interest</h2>
+									<ul class="style2">
+										<li><a href="http://polaris.cs.wcu.edu">Polaris - WCU's Math & CS Server</a></li>
+										<li><a href="http://www.github.com">Github</a></li>
+										<li><a href="http://www.stackoverflow.com">Stack Overflow</a></li>
+										<li><a href="http://www.overapi.com">Great collection of API References</a></li>
+										<li><a href="http://docs.oracle.com/javase/7/docs/api/">Oracle Java API Documentation</a></li>
+										<li><a href="http://dev.mysql.com/doc/refman/5.6/en/index.html">MySQL Documentation Reference</a></li>
+										<li><a href="http://www.acm.uiuc.edu/webmonkeys/book/c_guide/">C Coding Reference</a></li>
+										<li><a href="http://msdn.microsoft.com/en-us/library/618ayhy6.aspx">MSDN C# Coding Reference</a></li>
+										<li><a href="http://lxr.linux.no">Linux Kernel Cross Reference</a></li>
+									</ul>
+								</section>
+						
+						</div>
+						<div class="3u">
+						
+							<!-- Links -->
+								<section>
+									<h2>Websites I enjoy</h2>
+									<ul class="style2">
+										<li><a href="http://xkcd.com">XKCD - A great math/science webcomic</a></li>
+										<li><a href="http://www.stumbleupon.com">Stumbleupon</a></li>
+										<li><a href="http://www.reddit.com/r/programming">/r/programming - Reddit.com</a></li>
+										<li><a href="http://www.thedailywtf.com">The Daily WTF - IT-related news</a></li>
+									</ul>
+								</section>
+						
+						</div>
+						<div class="6u">
+						
+							<!-- Contact -->
+								<section>
+									<h2>Get in touch</h2>
+									<div class="5grid">
+										<div class="row">
+											<div class="6u">
+												<dl class="contact">
+													<dt>Twitter</dt>
+													<dd><a href="http://twitter.com/chrisdevward">@chrisdevward</a></dd>
+													<dt>WWW</dt>
+													<dd><a href="http://cwardcode.com">cwardcode.com</a></dd>
+													<dt>Github</dt>
+													<dd><a href="http://github.com/cwardcode">github.com/cwardcode</a></dd>
+                                                    <dt>Email</dt>
+													<dd><a href="mailto:chris.dev.ward@gmail.com">chris.dev.ward@gmail.com</a></dd>
+
+												</dl>
+											</div>
+											<div class="6u">
+												<dl class="contact">
+													<dt>Phone</dt>
+													<dd>Provided upon request</dd>
+												</dl>
+											</div>
+										</div>
+									</div>
+								</section>
+						
+						</div>
+					</div>
+					<div class="row">
+						<div class="12u">
+							<div id="copyright">
+								&copy; C Ward Code. All rights reserved | Images: <a href="http://fotogrph.com/">Fotogrph</a> + <a href="http://iconify.it/">Iconify.it</a> | Design: <a href="http://html5up.net/">HTML5 Up!</a> | <a href="/access/">Login</a>
+							</div>
+						</div>
+					</div>
+				</footer>
+            </div>
+	</body>
+</html>

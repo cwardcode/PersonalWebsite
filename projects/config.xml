@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<juiceboxgallery 
+
+	galleryTitle="Sliding Frenzy"
+	useThumbDots="true"
+
+>
+  <image imageURL="images/StartScreen.jpg"
+	thumbURL="thumbs/StartScreen.jpg"
+	linkURL="images/StartScreen.jpg"
+	linkTarget="_blank"
+	sourcePath="/srv/http/projects/images/StartScreen.png">
+    <title><![CDATA[StartScreen]]></title>
+    <caption><![CDATA[]]></caption>
+  </image>
+  <image imageURL="images/CustomPuzzles.jpg"
+	thumbURL="thumbs/CustomPuzzles.jpg"
+	linkURL="images/CustomPuzzles.jpg"
+	linkTarget="_blank"
+	sourcePath="/srv/http/projects/images/CustomPuzzles.png">
+    <title><![CDATA[CustomPuzzles]]></title>
+    <caption><![CDATA[]]></caption>
+  </image>
+  <image imageURL="images/StartGame.jpg"
+	thumbURL="thumbs/StartGame.jpg"
+	linkURL="images/StartGame.jpg"
+	linkTarget="_blank"
+	sourcePath="/srv/http/projects/images/StartGame.png">
+    <title><![CDATA[StartGame]]></title>
+    <caption><![CDATA[]]></caption>
+  </image>
+  <image imageURL="images/WinScreen.jpg"
+	thumbURL="thumbs/WinScreen.jpg"
+	linkURL="images/WinScreen.jpg"
+	linkTarget="_blank"
+	sourcePath="/srv/http/projects/images/WinScreen.png">
+    <title><![CDATA[WinScreen]]></title>
+    <caption><![CDATA[]]></caption>
+  </image>
+  <image imageURL="images/LeaderBoard.jpg"
+	thumbURL="thumbs/LeaderBoard.jpg"
+	linkURL="images/LeaderBoard.jpg"
+	linkTarget="_blank"
+	sourcePath="/srv/http/projects/images/LeaderBoard.png">
+    <title><![CDATA[LeaderBoard]]></title>
+    <caption><![CDATA[]]></caption>
+  </image>
+</juiceboxgallery>
