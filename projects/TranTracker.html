@@ -29,9 +29,6 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
                 <link rel="stylesheet" href="css/style.css" />
                 <link rel="stylesheet" href="css/style-desktop.css" />
             </noscript>
-            <!--[if lte IE 9]><link rel="stylesheet" href="css/ie9.css" /><![endif]-->
-            <!--[if lte IE 8]><link rel="stylesheet" href="css/ie8.css" /><![endif]-->
-            <!--[if lte IE 7]><link rel="stylesheet" href="css/ie7.css" /><![endif]-->
             <script>
                 var _prum = [['id', '519c9234abe53d5d49000000'],
                 ['mark', 'firstbyte', (new Date()).getTime()]];
@@ -116,7 +113,8 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
                                         <h2>Useful Resources</h2>
                                         </header>
                                         <ul class="style2">
-                                            <li><a href="#">Coming Soon</a></li>
+                                            <li><a href="http://developer.android.com/reference/packages.html">Android API Reference</a></li>
+                                            <li><a href="https://docs.djangoproject.com/en/1.8/">Django Framework Reference</a></li>
                                         </ul>
                                         </section>
 
@@ -130,23 +128,47 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
                                         <article>
                                         <header class="major">
                                         <h2>Capstone -> TranTracker</h2>
-                                        <span class="byline">An application suite to allow the tracking of campus shuttles, or any type of vehicle for that matter.</span>
+                                        <span class="byline">An application suite to allow the tracking of campus shuttles. 
+                                            <br> Code is now opensource and available at: <a href="http://github.com/cwardcode/trantracker"> TranTracker on Github</a>
+                                            <br> You may also find the trantracker website here: <a href="http://www.trantracker.com">TranTracker Website</a>
+                                        </span>
                                         </header>
-                                        <h2>TranTracker is currently in development. Check back soon!</h2>
-                                        <!--	<span class="image image-xsmall"><a href="images/Default.png" rel="shadowbox"/><img src="images/Default.png" alt=""/></a></span> -->
-                                        <!--		
-                                        <p>Put brief description of TranTracker here.</p>
 
-                                        <h3>Tracking Server</h3>
-                                        <p>Brief description of the tracking server used</p>
+                                        <h3>Seriously though, where's the shuttle?</h3>
+                                       <p>In a campus environment, being on time is key. Students, professors, and administrators are required to attend meetings and show up to classes on 
+                                          time. This is nearly impossible if using a campus shuttle, unless you know where the shuttle is, and how long it will take to get to your destination. 
+                                          With our project, we envision creating an application to help aid in the efficiency  of shuttle usage. We can help administrators find issues with shuttle 
+                                          routes that would not be apparent by just polling passengers. We could collect administrative data, such as average times between stops, which stops have 
+                                          the most ridership, and on-time percentages against the time intervals advertised.
+                                       </p> 
+                                         <span class="image image-xsmall"><a href="images/trantracker_poster.png" rel="shadowbox"/><img src="images/trantracker_poster.png" alt=""/></a></span> 
+                                         <p>Poster for TranTracker, winning the poster competition, and presented at Appalachian Energy Summit 2014 focusing on campus sustainability.</p>
 
-                                        <h3>Mobile Applications</h3>
-                                        <p>Description of Android/iPhone applications here. Along with screenshots of apps</p>
-                                        <span class="image image-xsmall"><a href="images/Default.png" rel="shadowbox"/><img src="images/Default.png" alt=""/></a></span>
 
-                                        <h3>Web Application</h3>
-                                        <p>Description of Web application here. Along with screenshots of the site.</p>
-                                        -->
+                                       <h3>So, how does it work?</h3>
+                                        <p>
+                                          TranTracker is made up of three major components:
+                                            <li>Android tracking application: One on each shuttle</li>
+                                            <li>Database server</li>
+                                            <li>Client application: Either through Android, iOS, or the <a href="http://www.trantracker.com">trantracker website</a>
+                                          </p><p>
+                                            The Android-based tracking application sends the current location, speed, and driver information in a 3 second interval to the database server. Users may use any of
+                                            the client applications to connect and view the current status of each shuttle on the system, along with their estimated time of arrival and name of the nearest shuttle stop. 
+                                            Administrators may find the administration panel useful, as data are collected from each shuttle stop, and are presented in various charts showing on-time percentages for each 
+                                            shuttle, and amount of people entering/exiting a shuttle at each shuttle stop.
+                                          </p><p>
+                                            Setup is fairly straightforward. 
+                                            Go to the administration panel for TranTracker through the website, and add each route, driver, and shuttle that's required. 
+                                            Next nstall the Android tracking application onto an android phone, select which route the shuttle will be running, and the current driver.
+                                        </p>
+                                       <h3>Conferences Presented:</h3>
+                                       <p> TranTracker has been presented at the following conferences. If there is an abstract available, click the name of the conference to view.
+                                        <li>Western Carolina University's Undergraduate Research Exposition</li>
+                                        <li><a href="https://ncurdb.cur.org/ncur2014/search/display_ncur.aspx?id=83795">NCUR - National Conference for Undergraduate Research</a> - April 3-5 2014 - Louisville, Kentucky</li>
+                                        <li><a href="http://sustain.appstate.edu/sites/sustain.appstate.edu/files/Ward_TranTracker_AESproposal.pdf">AES2015 - Appalachian Energy Summit</a> - July 28-30 2014 - Boone, North Carolina</li>
+                                      </p>
+                                       <span class="image image-xsmall"><a href="images/presenting.jpg" rel="shadowbox"/><img src="images/presenting.jpg" alt=""/></a></span> 
+                                         <p>Presenting the TranTracker poster at Appalachian Energy Summit.</p>
 
                                         </article>
 
