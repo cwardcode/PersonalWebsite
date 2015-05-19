@@ -89,9 +89,9 @@
 															<h3><a>Project 2</a></h3>
                                                             <span class="date">A Simple Shell</span>
 														</header>
-														<p>A simple shell application for unix, along the lines of Bash. The shell included the following functionality: 
+														<p>A simple shell application for Unix, along the lines of Bash. The shell included the following functionality: 
                                                            ls and rm commands. stdin, stdout, and stderr redirection, along with redirecting both stderr and stdout. 
-                                                           Interprocess communication via pipe Signal handler to catch "ctrl-c", so as not to kill the shell itself. 
+                                                           Inter-process communication via pipe Signal handler to catch "ctrl-c", so as not to kill the shell itself. 
                                                         </p>
 													</div>
 												</article>
@@ -103,8 +103,8 @@
 															<h3><a>Project 3</a></h3>
                                                             <span class="date">Zombie Shotgun</span>
 														</header>
-														<p>A userspace library with a call to a kernel-based system call for a Minix operating system. Given a PID, the 
-                                                           systemcall will search the process table, and if the PID is found, will search for any children that are zombies.
+														<p>A user-space library with a call to a kernel-based system call for a Minix operating system. Given a PID, the 
+                                                           system-call will search the process table, and if the PID is found, will search for any children that are zombies.
                                                            If a zombie is found, it is eliminated from the process table, effectively "killing" it.</p>
 													</div>
 												</article>
@@ -129,7 +129,7 @@
                                                             <span class="date">System Calls in Gentoo</span>
 														</header>
 														<p>This project consisted of modifying the Gentoo kernel, and added a custom implementation of getpid(), along with added
-                                                           system calls getpppid(), and zombiecount(). getpppid() retreived the grandparent PID of the input PID, and zombiecount
+                                                           system calls getpppid(), and zombiecount(). getpppid() retrieved the grandparent PID of the input PID, and zombiecount
                                                            output the number of zombies found for a given PID.</p>
 													</div>
 												</article>
@@ -139,7 +139,7 @@
 													<div>
 														<header>
 															<h3><a>Extra - Gentoo 2</a></h3>
-                                                            <span class="date">Interprocess Message Queue</span>
+                                                            <span class="date">Inter-process Message Queue</span>
 														</header>
 														<p>This project consisted of modifying the Gentoo kernel with an inter-process message queue for communication within a monolithic 
                                                            kernel. The message queue system is entirely based in kernel space. This introduced the need for not only thread blocking
