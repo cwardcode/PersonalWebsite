@@ -6,7 +6,7 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
 -->
 <html>
     <head>
-        <title>TranTracker - Projects - C. Ward Code</title>
+        <title>Data Collection/Streaming Device - Projects - C. Ward Code</title>
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <meta name="description" content="" />
         <meta name="keywords" content="" />
@@ -101,11 +101,12 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
 
                                         <section>
                                         <header class="major">
-                                        <h2>GPS Tracking</h2>
+                                            <h2>Data Collecting Downsides</h2>
                                         </header>
-                                        <p>Fleet management GPS technologies rely extensively on the usage of data networks. After pulling 
-                                        the current location, and velocity of a specific vehicle, it is then sent to a server through 
-                                        GSM networks, and then analyzed and displayed on a map for users to view.</p>
+                                        <p>Since the advent of field data loggers, there has always been one problem -- getting the data into scientists hands to analyze.
+                                        Having multiple loggers in potentially different locations can be a hassle when it comes to actually collecting the logged data, requiring 
+                                        someone to go out to the field with a laptop and plugging in to get their precious data. Why can't this process be automated, specifically for the 
+                                        Campbell Scientific series of Dataloggers?</p>
 
                                         </section>
 
@@ -114,8 +115,7 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
                                         <h2>Useful Resources</h2>
                                         </header>
                                         <ul class="style2">
-                                            <li><a href="http://developer.android.com/reference/packages.html">Android API Reference</a></li>
-                                            <li><a href="https://docs.djangoproject.com/en/1.8/">Django Framework Reference</a></li>
+                                            <li><a href="http://pycampbellcr1000.readthedocs.org/en/latest/">PyCampbell Package Reference</a></li>
                                         </ul>
                                         </section>
 
@@ -128,49 +128,29 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
 
                                         <article>
                                         <header class="major">
-                                        <h2>Capstone -> TranTracker</h2>
-                                        <span class="byline">An application suite to allow the tracking of campus shuttles. 
-                                            <br> Code is now open-source and available at: <a href="http://github.com/cwardcode/trantracker"> TranTracker on Github</a>
-                                            <br> You may also find the TranTracker website here: <a href="http://www.trantracker.com">TranTracker Website</a>
+                                        <h2>Realtime Data Streaming and Data Collection</h2>
+                                        <span class="byline">A single-board computer system allowing the automated data collection and real-time streaming. 
+                                            <br> Code is completely open-source and available at: <a href="http://github.com/cwardcode/CampbellDataStreaming">Data Streaming on Github</a>
                                         </span>
                                         </header>
 
-                                        <h3>Seriously though, where's the shuttle?</h3>
-                                       <p>In a campus environment, being on time is key. Students, professors, and administrators are required to attend meetings and show up to classes on 
-                                          time. This is nearly impossible if using a campus shuttle, unless you know where the shuttle is, and how long it will take to get to your destination. 
-                                          With our project, we envision creating an application to help aid in the efficiency  of shuttle usage. We can help administrators find issues with shuttle 
-                                          routes that would not be apparent by just polling passengers. We could collect administrative data, such as average times between stops, which stops have 
-                                          the most ridership, and on-time percentages against the time intervals advertised.
+                                        <h3>Intro: DCDSD </h3>
+                                       <p> Sorry, this page is still being written. Check back soon!
                                        </p> 
-                                         <span class="image image-xsmall"><a href="images/trantracker_poster.png" rel="shadowbox"/><img src="images/trantracker_poster.png" alt=""/></a></span> 
-                                         <p>Poster for TranTracker, winning the poster competition, and presented at Appalachian Energy Summit 2014 focusing on campus sustainability.</p>
+                                         <span class="image image-xsmall"><a href="images/datastreammodel.png" rel="shadowbox"/><img src="images/datastreammodel.png" alt=""/></a></span> 
+                                         <p>Diagram showing data flow across components of the system.</p>
 
 
                                        <h3>So, how does it work?</h3>
                                         <p>
-                                          TranTracker is made up of three major components:
-                                            <li>Android tracking application: One on each shuttle</li>
-                                            <li>Database server</li>
-                                            <li>Client application: Either through Android, iOS, or the <a href="http://www.trantracker.com">TranTracker website</a>
+                                          This project is made up of four major components:
+                                            <li>Campbell Data logger</li>
+                                            <li>Single Board Computer Collection Device</li>
+                                            <li>Data server</li>
+                                            <li>Plot.ly Graphing service</a>
                                           </p><p>
-                                            The Android-based tracking application sends the current location, speed, and driver information in a 3 second interval to the database server. Users may use any of
-                                            the client applications to connect and view the current status of each shuttle on the system, along with their estimated time of arrival and name of the nearest shuttle stop. 
-                                            Administrators may find the administration panel useful, as data are collected from each shuttle stop, and are presented in various charts showing on-time percentages for each 
-                                            shuttle, and amount of people entering/exiting a shuttle at each shuttle stop.
-                                          </p><p>
-                                            Setup is fairly straightforward. 
-                                            Go to the administration panel for TranTracker through the website, and add each route, driver, and shuttle that's required. 
-                                            Next install the Android tracking application onto an android phone, select which route the shuttle will be running, and the current driver.
+                                            To fill in later.....
                                         </p>
-                                       <h3>Conferences Presented:</h3>
-                                       <p> TranTracker has been presented at the following conferences. If there is an abstract available, click the name of the conference to view.
-                                        <li>Western Carolina University's Undergraduate Research Exposition</li>
-                                        <li><a href="https://ncurdb.cur.org/ncur2014/search/display_ncur.aspx?id=83795">NCUR - National Conference for Undergraduate Research</a> - April 3-5 2014 - Louisville, Kentucky</li>
-                                        <li><a href="http://sustain.appstate.edu/sites/sustain.appstate.edu/files/Ward_TranTracker_AESproposal.pdf">AES2015 - Appalachian Energy Summit</a> - July 28-30 2014 - Boone, North Carolina</li>
-                                      </p>
-                                       <span class="image image-xsmall"><a href="images/presenting.jpg" rel="shadowbox"/><img src="images/presenting.jpg" alt=""/></a></span> 
-                                         <p>Presenting the TranTracker poster at Appalachian Energy Summit.</p>
-
                                         </article>
 
                                     </div>
