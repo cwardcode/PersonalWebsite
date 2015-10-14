@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- jquery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>	
+<!-- cross domain ajax script -->
+<script src="http://aws.cwardcode.com/js/jquery.xdomainajax.js"></script>
+<!-- D3.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+<!-- Plotly.js -->
+<script src="https://d14fo0winaifog.cloudfront.net/plotly-basic.js"></script>
+<script>
+    function getCSVData(data, dataColm) {
+        var dataLines = data.split(/\r\n|\n/);
+        var headers = dataLines[0].split(',');
+        var lines = [];
+
+        for (var i=1; i<dataLines.length; i++) {
+            var data = dataLines[i].split(',');
+            if (data.length == headers.length) {
+
+                var dataString = "";
+                for (var j=0; j<headers.length; j++) {
+                    if(headers[j] == dataColm) {
+                        dataString += data[j] + ", ";
+                    }
+                }
+            }
+            lines.push(dataString);
+        }
+        return lines;
+    } 
+
+    function getData(){                                                             
+        jQuery.get('https://www.hydrovu.com/api/company/5300312663392256/report?q=%7B%22resolution%22:10,%22timeSlice%22:%5B%7B%22value%22:1442058240,%22op%22:%22%3E=%22%7D,%7B%22value%22:1442304000,%22op%22:%22%3C=%22%7D%5D,%22units%22:%7B%22baro%22:%22psi%22,%22temperature%22:%22celsius%22,%22level%22:%22meter%22,%22pressure%22:%22psi%22%7D,%22active%22:true,%22gpsBounds%22:%7B%22northeast%22:%7B%22latitude%22:62.02586767519265,%22longitude%22:-52.332235999999966%7D,%22southwest%22:%7B%22latitude%22:9.284751635846062,%22longitude%22:-157.80098599999997%7D%7D,%22pageObject%22:%7B%22size%22:1000,%22start%22:0%7D,%22locationIds%22:%5B4738711174512640,5416931037282304,6304557567049728,6311491657531392%5D%7D&timeRange=%7B%22from%22:1442156160,%22to%22:1442242560%7D&authorization=kyMXwE5vW%2B9YJLVsG3fQEvcQltqSY5ejhilbCXDM8%2BOoWuRK1wWMYRYQhiPaog45Bmd1b6Y%2BC8aUJu%2FPPjMzM%2BxspFWfCqqsjtZ3YDkvOhb%2Fn1s6lN5UBtpeYyOS34aJPyGvzjO%2BsmYoIEdryn4AOA%3D%3D', function(res) {
+                data = JSON.parse(JSON.stringify(res, null, 2)).responseText.replace(/&#xd;/g, "");       
+                data = data.substring(19, data.length - 14);
+
+                data2 = data.split("Long Branch");
+                lb1Data = data2[1].substring(7)
+                timeseries = getCSVData(lb1Data,"time"); 
+                lb1Temp = getCSVData(lb1Data,"temperature (celsius)");
+                lb1Level = getCSVData(lb1Data,"level (meter)");
+                lb1Pres = getCSVData(lb1Data,"pressure (psi)");
+
+                lb2Data = data2[2].substring(7)
+                lb2Temp = getCSVData(lb2Data,"temperature (celsius)");
+                lb2Level = getCSVData(lb2Data,"level (meter)");
+                lb2Pres = getCSVData(lb2Data,"pressure (psi)");
+
+                lb3Data = data2[3].substring(7)
+                lb3Temp = getCSVData(lb3Data,"temperature (celsius)");
+                lb3Level = getCSVData(lb3Data,"level (meter)");
+                lb3Pres = getCSVData(lb3Data,"pressure (psi)");
+
+                lbBaroData = data2[4].substring(8);
+
+                var lb1TempTrace = {
+                    x: timeseries,
+                    y: lb1Temp,
+                    type: 'scatter',
+                    name:'Well 1 Temperature'
+
+                };
+                var lb1LevelTrace = {
+                    x: timeseries,
+                    y: lb1Level,
+                    type: 'scatter',
+                    name:'Well 1 Groundwater Level'
+ 
+                };
+                var lb1PresTrace = {
+                    x: timeseries,
+                    y: lb1Pres,
+                    type: 'scatter',
+                    name:'Well 1 Pressure'
+
+                };
+                var lb2TempTrace = {
+                    x: timeseries,
+                    y: lb2Temp,
+                    type: 'scatter',
+                    name:'Well 2 Temperature'
+
+                };
+                var lb2LevelTrace = {
+                    x: timeseries,
+                    y: lb2Level,
+                    type: 'scatter',
+                    name:'Well 2 Groundwater Level'
+
+                };
+                var lb2PresTrace = {
+                    x: timeseries,
+                    y: lb2Pres,
+                    type: 'scatter',
+                    name:'Well 2 Pressure'
+ 
+                };
+                var lb3TempTrace = {
+                    x: timeseries,
+                    y: lb3Temp,
+                    type: 'scatter',
+                    name:'Well 3 Temperature'
+                };
+                var lb3LevelTrace = {
+                    x: timeseries,
+                    y: lb3Level,
+                    type: 'scatter',
+                    name:'Well 3 Groundwater Level' 
+                };
+                var lb3PresTrace = {
+                    x: timeseries,
+                    y: lb3Pres,
+                    type: 'scatter',
+                    name:'Well 3 Pressure' 
+                };
+                var layout = {
+                  title:'Temperatures at Long Branch'
+                };
+                var plotTempData = [lb1TempTrace, lb2TempTrace, lb3TempTrace];
+                var plotLevelData = [lb1LevelTrace, lb2LevelTrace, lb3LevelTrace];
+                var plotPresData = [lb1PresTrace, lb2PresTrace, lb3PresTrace];
+
+                Plotly.newPlot('tempDiv', plotTempData, layout);
+                layout = {
+                    title: 'Groundwater Levels at Long Branch'
+                };
+                Plotly.newPlot('levelDiv', plotLevelData, layout);
+                layout = {
+                    title: 'Pressures at Long Branch',
+                };
+                Plotly.newPlot('pressureDiv', plotPresData, layout);
+            });                                                                         
+    } 
+
+    getData();
+</script>
+</head>
+<body>
+
+
+<div id="tempDiv">
+</div>
+<div id="levelDiv">
+</div>
+<div id="pressureDiv">
+</div>
+</body>
+</html>

@@ -1,0 +1,198 @@
+<html>
+<head>
+    <title>CS240 Project 2 by Chris Ward</title>
+    <script>
+        
+    /**
+     * Basic script to calculate car rental costs for a business.
+     * Author: Chris Ward
+     * Date: 10/1/2015
+     */
+
+    /**
+     * Gets each entry from its respective field, and performs calculations 
+     * necessary
+     *
+     **/
+    function calcRentalCost() {
+        //Get beginning inventory from field
+        var empName = document.getElementById("employeeName").value;
+        //Get ending inventory from field
+        var begRead = document.getElementById("begReading").value;
+        //Get ending inventory from field
+        var endRead = document.getElementById("endReading").value; 
+        var daysUsed = document.getElementById("daysUsed").value; 
+
+        var baseRateAmt = 30;
+        var mileageCharge = 0.29;
+        var dailyInsurance = 9;
+        var salesTaxAmt = .0775;
+
+        var baseRate = (+baseRateAmt * daysUsed);
+        var milesDriven = (+endRead - begRead);
+        var mileageAmt = (+mileageCharge * milesDriven);
+        var insuranceFee = (dailyInsurance * +daysUsed);
+        var carRentalFee = (baseRate + mileageAmt + insuranceFee);
+        var salesTax = (+salesTaxAmt * carRentalFee);
+        var totalAmt = (+carRentalFee + salesTax);
+
+        document.getElementById("employeeNameRes").innerHTML = empName;
+        document.getElementById("milesDrivenRes").innerHTML = milesDriven;
+        document.getElementById("baseRateAmt").innerHTML = baseRate;
+        document.getElementById("mileageAmt").innerHTML = mileageAmt.toFixed();
+        document.getElementById("insuranceAmt").innerHTML = insuranceFee;
+        document.getElementById("carRentFee").innerHTML = carRentalFee;
+        document.getElementById("salesTax").innerHTML = salesTax.toFixed(2);
+        document.getElementById("total").innerHTML = totalAmt.toFixed(2);
+
+    }
+
+    /**
+     * Validates the form, and prompts user with errors.
+     */
+    function validateForm() {
+        var printRtn = calcRentalCost();
+        switch(printRtn){
+            case 1:
+                alert("Please enter the Beginning Inventory");
+                break;
+            case 2:
+                alert("Please ensure the Beginning Inventory is a number");
+                break;
+            case 3:
+                alert("Please enter the Ending Inventory");
+                break;
+            case 4: 
+                alert("Please ensure the Ending Inventory is a number");
+                break;
+            case 6: 
+                alert("Please ensure the Cost of Goods is a number");
+                break;
+            default:
+                //By default do nothing.
+                break;
+        }
+    }
+    </script>
+
+</head>
+<body>
+    <div class="divInputForm">
+        <table>
+            <tr>
+                <td>
+                    <h2>Project 2</h2>
+                </td>
+                <td>
+                    <!-- Buffer -->
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Employee Name</label>
+                </td>
+                <td>
+                    <input type="text" id="employeeName" name="employeeName">
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label>Beginning Odometer Reading</label>
+                </td>
+                <td>
+                    <input type="text" id="begReading" name="milesDriven">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Ending Odometer Reading</label>
+                </td>
+                <td>
+                    <input type="text" id="endReading" name="baseRate">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Number of Days Cars was Used</label>
+                </td>
+                <td>
+                    <input type="text" id="daysUsed" name="daysUsed">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <!-- Buffer -->
+                </td>
+                <td>
+                    <button onclick="validateForm();" value="Submit">Calculate</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h2>Results</h2>
+                </td>
+                    <!-- Buffer -->
+                <td>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Employee Name</label>
+                </td>
+                <td id="employeeNameRes">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Miles Driven</label>
+                </td>
+                <td id="milesDrivenRes">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Base Rate Amount</label>
+                </td>
+                <td id="baseRateAmt">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Mileage Amount</label>
+                </td>
+                <td id="mileageAmt">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Insurance Amount</label>
+                </td>
+                <td id="insuranceAmt">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Car Rental Fee</label>
+                </td>
+                <td id="carRentFee">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Sales Tax</label>
+                </td>
+                <td id="salesTax">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Total Car Rental Amount</label>
+                </td>
+                <td id="total">
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

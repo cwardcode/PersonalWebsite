@@ -1,0 +1,32 @@
+body {
+    font-family: Georgia, serif;
+    background-color: #DEDFE7;
+}
+
+h1 {
+    color: #102873;
+    font-family: Garamond;
+    font-size: 40pt;
+}
+
+h2 {
+    color: #B57D29;
+    font-family: Garamond;
+    font-size: xx-large;
+}
+
+h3 {
+    color: #ADB2BD;
+    font-family: Garamond;
+    font-size: x-large;
+}
+
+div {
+    font-size: x-small;
+    color: #B57D29;
+}
+
+p {
+    font-size: x-small;
+    color: #102873;
+}

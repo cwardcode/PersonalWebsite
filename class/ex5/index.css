@@ -1,0 +1,21 @@
+body {
+    font-family: Sans-Serif;
+    background-color: khaki;
+}
+
+.highlight {
+    color: brown;
+}
+
+.leftRed {
+    color: red;
+    text-align: right;
+}
+#updatedText {
+    background-color: wheat;
+}
+#heading1 {
+    font-weight: bold;
+    text-align: center;
+    background-color: sandybrown;
+}

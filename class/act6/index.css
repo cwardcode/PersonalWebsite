@@ -1,0 +1,13 @@
+.kicker{
+    font-family: Sans-Serif;
+    color: purple;
+}
+
+#byline{
+    font-family: Sans-Serif;
+    color: grey;
+}
+
+.highlightedCompany {
+    color: mediumblue;
+}

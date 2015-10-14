@@ -1,0 +1,228 @@
+<html>
+<head>
+<title>CS240 Project 2 by Chris Ward</title>
+<link rel="stylesheet" href="index.css"/>
+<script>
+
+/**
+ * Basic script to calculate Car rental price for a business.
+ * Author: Chris Ward
+ * Date: 10/1/2015
+ */
+
+/**
+ * Gets each entry from its respective field, and performs calculations 
+ * necessary
+ **/
+function calcRentalCost() {
+    //Holds base rental amount/day (dollars)
+    var baseRateAmt = 30;
+    //Holds per-mile charge (dollars)
+    var mileageCharge = 0.29;
+    //Holds daily Insurance fee (dollars)
+    var dailyInsurance = 9;
+    //Holds Sales Tax amount (decimal)
+    var salesTaxAmt = .0775;
+
+    //Print all constants
+    console.log("Printing all constants: "); 
+    console.log("baseRateAmt = " + baseRateAmt);
+    console.log("mileageCharge = " + mileageCharge);
+    console.log("dailyInsurance = " + dailyInsurance);
+    console.log("SalesTaxAmt = " + salesTaxAmt);
+
+    console.log("Print all entered data from fields");
+    //Get employee name from field
+    var empName = document.getElementById("employeeName").value;
+    console.log("employee name = " + empName);
+    //Get beginning reading from field
+    var begRead = document.getElementById("begReading").value;
+    console.log("beginning odometer = " + begRead);
+    //Get ending reading from field
+    var endRead = document.getElementById("endReading").value; 
+    console.log("ending odometer = " + endRead);
+    //Get days used from field
+    var daysUsed = document.getElementById("daysUsed").value; 
+    console.log("days used = " + daysUsed);
+
+    // Do calculations and print reults
+    console.log("Print calculations"); 
+    var baseRate = (+baseRateAmt * daysUsed);
+    console.log("base rates = " + baseRate);
+    var milesDriven = (+endRead - begRead);
+    console.log("miles driven (calculated) = " + milesDriven);
+    var mileageAmt = (+mileageCharge * milesDriven);
+    console.log("miles Amount (calculated) = " + mileageAmt);
+    var insuranceFee = (dailyInsurance * +daysUsed);
+    console.log("insurance fee = " + insuranceFee);
+    var carRentalFee = (baseRate + mileageAmt + insuranceFee);
+    console.log("Car Rental Fee = " + carRentalFee);
+    var salesTax = (+salesTaxAmt * carRentalFee);
+    console.log("Sales Tax = " + salesTax);
+    var totalAmt = (+carRentalFee + salesTax);
+    console.log("total = " + totalAmt);
+
+    document.getElementById("employeeNameRes").innerHTML = empName;
+    document.getElementById("milesDrivenRes").innerHTML = milesDriven;
+    document.getElementById("baseRateAmt").innerHTML = baseRate;
+    document.getElementById("mileageAmt").innerHTML = mileageAmt.toFixed();
+    document.getElementById("insuranceAmt").innerHTML = insuranceFee;
+    document.getElementById("carRentFee").innerHTML = carRentalFee;
+    document.getElementById("salesTax").innerHTML = salesTax.toFixed(2);
+    document.getElementById("total").innerHTML = totalAmt.toFixed(2);
+
+}
+
+/**
+ * Validates the form, and prompts user with errors.
+ */
+function validateForm() {
+    var printRtn = calcRentalCost();
+    switch(printRtn){
+        case 1:
+            alert("Please enter the Beginning Inventory");
+            break;
+        case 2:
+            alert("Please ensure the Beginning Inventory is a number");
+            break;
+        case 3:
+            alert("Please enter the Ending Inventory");
+            break;
+        case 4: 
+            alert("Please ensure the Ending Inventory is a number");
+            break;
+        case 6: 
+            alert("Please ensure the Cost of Goods is a number");
+            break;
+        default:
+            //By default do nothing.
+            break;
+    }
+}
+</script>
+
+</head>
+<body>
+<div class="divInputForm">
+    <table>
+        <tr>
+            <td>
+                <h2 id="inputLabel">Project 2</h2>
+            </td>
+            <td>
+                <!-- Buffer -->
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Employee Name</label>
+            </td>
+            <td>
+                <input type="text" id="employeeName" name="employeeName">
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <label>Beginning Odometer Reading</label>
+            </td>
+            <td>
+                <input type="text" id="begReading" name="milesDriven">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Ending Odometer Reading</label>
+            </td>
+            <td>
+                <input type="text" id="endReading" name="baseRate">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Number of Days Cars was Used</label>
+            </td>
+            <td>
+                <input type="text" id="daysUsed" name="daysUsed">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <!-- Buffer -->
+            </td>
+            <td>
+                <button id="subBtn" onclick="validateForm();" value="Submit">Calculate</button>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div class="divResults">
+    <table>
+        <td>
+            <h2 id="inputLabel">Results</h2>
+        </td>
+        <!-- Buffer -->
+        <td>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>Employee Name</label>
+        </td>
+        <td id="employeeNameRes">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>Miles Driven</label>
+        </td>
+        <td id="milesDrivenRes">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>Base Rate Amount</label>
+        </td>
+        <td id="baseRateAmt">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>Mileage Amount</label>
+        </td>
+        <td id="mileageAmt">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>Insurance Amount</label>
+        </td>
+        <td id="insuranceAmt">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>Car Rental Fee</label>
+        </td>
+        <td id="carRentFee">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>Sales Tax</label>
+        </td>
+        <td id="salesTax">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>Total Car Rental Amount</label>
+        </td>
+        <td id="total">
+        </td>
+    </tr>
+</table>
+    </div>
+</body>
+</html>

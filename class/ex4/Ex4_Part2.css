@@ -1,0 +1,30 @@
+body {
+    font-family: Lev Serif Regular, serif;
+    background-color: #FFE761;
+    color: #326342;
+    font-size: larger;
+}
+h1 {
+    color: #092E20;
+    font-family: Mowi, sans-serif;
+    font-size: 40pt;
+}
+h2 {
+    color: #234F32;
+    font-family: Sabel Heavy, sans-serif;
+    font-size: xx-large;
+}
+h3 {
+    color: #326342;
+    font-family: Sabel Heavy, sans-serif;
+    font-size: x-large;
+}
+div {
+    font-family: Courier;
+    font-size: small;
+    color: #B57D29;
+}
+p {
+    font-size: small;
+    color: #92CC47;
+}

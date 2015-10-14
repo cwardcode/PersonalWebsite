@@ -1,0 +1,184 @@
+<html>
+<head>
+<title> HTML Tables</title>
+<script>
+/**
+ * Basic script to print details entered into an HTML form.
+ * Author: Chris Ward
+ * Date: 8/24/2015
+ */
+
+/**
+ * A function that encapsulates the standard reset button and also clears our
+ * selections as well.
+ *
+ * Parameters: form - the form from which this method is called.
+ */
+function resetPage() {
+    //Reset form
+    document.getElementById("demographics").reset();
+    //Reset area where we print selected answers.
+    document.getElementById("data").innerHTML = "Answers will be here!";
+    return true;
+}
+
+/**
+ * Gets each entry from its respective field and prints it under the form
+ *
+ * return 0 - if all fields are entered correctly
+ *        1 = if first name field is not entered
+ *        2 = if last name field is not entered
+ *        3 = if year has not been chosen
+ *        4 = if major has not been selected
+ **/
+function printDetails() {
+    //Holds return value, true by default
+    var rtnVal = 0;
+    //Holds string representing our data
+    var dataString ="";
+    //Get first name from field
+    var fName = document.getElementById("firstName").value;
+    //Check if populated, if not set value to false
+    if(fName == "") {
+        return 1;
+    } else {
+        dataString = "First Name: " + fName + "<br/>";
+    }
+    //Get last name from field
+    var lName = document.getElementById("lastName").value;
+    //Check if populated, if not set value to false
+    if(lName == "") {
+        return 2;
+    } else {
+        dataString = dataString + "Last Name: " + lName + "<br/>";
+    }
+    //Get all radio elements
+    var radios = document.getElementsByName("year");
+    //Check if anything was checked
+    var selectionFound = false;
+    //Find which radio button was checked 
+    for(var i = 0; i < radios.length; i++) {
+        if(radios[i].checked) {
+            //Found it
+            selectionFound = true;
+            //Print value and a break to return to new line
+            dataString = dataString + "Year: " + radios[i].value + "<br/>";
+        }
+    }
+    if(!selectionFound) {
+        //Set return value to false, as form was not correctly filled
+        return 3; 
+    }
+    //Get all options for major select element
+    var selectId = document.getElementById("major").selectedIndex;
+    var majorSelected = document.getElementById("major").options[selectId].text;
+    //Add selected major to string, ignore selection text 
+    if(selectId == 0) { 
+        //Set return value to false, as form was not correctly filled
+        return 4; 
+    } else {
+        //Print major
+        dataString = dataString + "Major: " + majorSelected + "<br/>";
+    }
+    //Check to see ATIP involvement
+    var isAITPChecked = document.getElementById("AITPCheck").checked;
+    //Add ATIP involvement to string 
+    if(isAITPChecked) {
+        dataString = dataString + "Is involved with AITP.";
+    } else {
+        dataString = dataString + "Is not involved with AITP.";
+    }
+    //Display answers
+    document.getElementById("data").innerHTML = dataString; 
+
+    return rtnVal;
+}
+
+/**
+ * Validates the form, and prompts user with errors.
+ */
+function validateForm() {
+    var printRtn = printDetails();
+    switch(printRtn){
+        case 1:
+            alert("Please enter your first name");
+            break;
+        case 2:
+            alert("Please enter your last name");
+            break;
+        case 3: 
+            alert("Please enter your current year");
+            break;
+        case 4:
+            alert("Please enter your major");
+            break;
+        default:
+            //By default do nothing.
+            break;
+    }
+}
+</script>
+</head>
+<body style="background-color: aliceblue">
+<form id="demographics" onsubmit="printDetails(); return false;">
+    <Table>
+        <tr>
+            <td>First Name:</td>
+            <td><input id="firstName"type="text" name="firstName"><br/></td>
+        </tr>
+        <tr>
+            <td>Last Name:</td>
+            <td> <input id="lastName" type="text" name="lastName"><br/></td>
+        </tr>
+        <tr>
+            <td>Student Year:</td>
+            <td>
+                <input type="radio" name="year" value="Freshman">Freshman<br/>
+                <input type="radio" name="year" value="Sophomore">Sophomore<br/>
+                <input type="radio" name="year" value="Junior">Junior<br/>
+                <input type="radio" name="year" value="Senior">Senior<br/>
+            </td>
+        </tr>
+        <tr>
+            <td>Major:</td>
+            <td>
+                <select id="major" name="major">
+                    <option value="DEFAULT">Please select a major</option>
+                    <option value="CIS">Computer Information Systems</option>
+                    <option value="ACCT">Accounting</option>
+                    <option value="FIN">Finance</option>
+                    <option value="MGMT">Management</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <input id="AITPCheck" type="checkbox" value="AITP">Involved in AITP
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+            <!--
+                Had to use custom buttons due to submit() trying to call 
+                validateForm() when clearing fields - and it's not really being
+                used for what the legitimate submit function does.
+
+                <input type="submit" value="Submit"/>
+                <input type="reset" value="reset"/> 
+            -->
+                <button onclick="validateForm();">Submit</button>
+                <button onclick="resetPage(form);">Clear</button>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <p id="data"></p>
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

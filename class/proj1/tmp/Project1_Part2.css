@@ -1,0 +1,54 @@
+body {
+ background-color: #C0C0C0;
+ overflow: hidden;
+}
+
+h1 {
+   font-family: Georgia;
+   text-shadow: 1px 2px 1px
+}
+
+input {
+    background-color: #E5E4E2;
+}
+
+table {
+    background-color: lightgrey;
+    border-collapse: collapse;
+    width: 250px;
+}
+
+.divSalesTable {
+    font-family: sans-serif;
+    background-color: black;
+    color: #1796E6;
+    text-align: left;
+    width: 300px;
+    float: left;
+    padding: 30px;
+    border-style: dashed;
+    border-color: #1796E6;
+    border-width: medium;
+    border-radius: 24px;
+    font-family: sans-serif;
+}
+
+.divTotalTable {
+    font-family: sans-serif;
+    background-color: black;
+    color: #E56717;
+    text-align: left;
+    width: 300px;
+    float: left;
+    padding: 35px;
+    border-style: dotted;
+    border-color: #E56717;
+    border-width: medium;
+    border-radius: 24px;
+    font-family: sans-serif;
+}
+
+.headerText {
+    font-family: Times New Roman;
+    color: grey;
+}
