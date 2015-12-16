@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Not So Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js"></script>
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 100%;
+      }
+    </style>
+    <script>
+        var map;
+        var centerOfMap = {lat: 35.303436, lng: -83.205557};
+        var gribbleGapMarker;
+        var gribbleGapContent = '<div style="background-color: green; color: white" id="content">'+
+          '<h1 id="firstHeading" class="firstHeading">Gribble Gap</h1><table><tr><td>'+
+          '<img height=100 width=100 src="./ggap.png"/></td><td>' +
+          '<div style="background-color: green; color: white" id="bodyContent">'+
+          '<p><b>Gribble Gap</b>, the entrance into the student ran research watershed '+
+          'that is part of the Western Carolina Hydrological research station. I work here!</p>' +
+          '</td></tr></div>' +
+          '</div>';
+        var glacierSiteMarker;
+        var glacierCoords  = {lat: 35.305757, lng: -83.207919};
+        var glacierContent = '<div style="background-color: green; color: white" id="content">'+
+          '<h1 id="firstHeading" class="firstHeading">Glacier Creek</h1>'+ '<table><tr><td>' +
+          '<img height=100 width=100 src="./glacier.png"/> </td><td>' +
+          '<div style="background-color: green; color: white" id="bodyContent">'+
+          '<p><b>Glacier Creek</b>, one of multiple research sites located in the watershed '+
+          'and has data collected at weekly intervals. Also the eastern most entrance to the watershed.</p>'+
+          '</td></tr></div>' +
+          '</div>';
+        var windSiteMarker;
+        var windCoords = {lat: 35.304648, lng: -83.208712};
+        var windContent = '<div style="background-color: green; color: white" id="content">'+
+          '<h1 id="firstHeading" class="firstHeading">Wind Creek</h1>'+ '<table><tr><td>' +
+          '<img height=100 width=100 src="./wind.png"/> </td><td>' +
+          '<div style="background-color: green; color: white" id="bodyContent">'+
+          '<p><b>Wind Creek</b>, one of multiple research sites located in the watershed '+
+          'and has data collected at weekly intervals.</p>'+
+          '</td></tr></div>' +
+          '</div>';
+
+        var zoomScale;
+
+        $(document).ready(function(){
+            $("#zoomIn").click(function(){
+                zoomScale = $("#zoomVal").val();
+                console.log("zoomin pressed, zoomscale is: " + zoomScale);
+                map.setZoom(+zoomScale);                     
+            });
+            initMap();
+         });     
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+              center: centerOfMap,
+              zoom: 17,
+              mapTypeId: google.maps.MapTypeId.ROADMAP
+            });
+            gribbleGapMarker = new google.maps.Marker({
+              position:centerOfMap,
+              map: map,
+              title: 'Gribble Gap'
+            });
+            var ggInfowindow = new google.maps.InfoWindow({
+                content: gribbleGapContent
+            });
+            gribbleGapMarker.addListener('click', function() {
+                ggInfowindow.open(map, gribbleGapMarker);
+            });
+            glacierSiteMarker = new google.maps.Marker({
+              position:glacierCoords,
+              map: map,
+              title: 'Glacier site'
+            });
+            var glacierInfowindow = new google.maps.InfoWindow({
+                content: glacierContent
+            });
+            glacierSiteMarker.addListener('click', function() {
+                glacierInfowindow.open(map, glacierSiteMarker);
+            });
+            windSiteMarker = new google.maps.Marker({
+              position: new google.maps.LatLng(35.304648, -83.208712),
+              map: map,
+              title: 'Wind site'
+              });
+            var windInfowindow = new google.maps.InfoWindow({
+                content: windContent
+            });
+            windSiteMarker.addListener('click', function() {
+                windInfowindow.open(map, windSiteMarker);
+            });
+        }
+    </script>
+  </head>
+  <body>
+    <b>Please enter desired zoom level:</b>
+    <input type="text" id="zoomVal"/>
+    <button id="zoomIn"> Zoom</button>
+    <div id="map"></div>
+  </body>
+</html>
+

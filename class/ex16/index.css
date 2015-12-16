@@ -1,0 +1,35 @@
+body{
+    background-color: lightgray;
+    font-family: Verdana;
+}
+
+.makeSerif {
+    font-family: serif;
+}
+.divInputForm {
+    color: blue;
+    font-weight: bold;
+    background-color:lightblue;
+    width:320px;
+    padding:10px;
+    border: 5px;
+    margin:0;
+    border-style: dashed;
+    border-color: black;
+    border-width: medium;
+    border-radius: 24px;
+    font-family: sans-serif;
+}
+
+.divDisplayResults {
+    background-color:lightgreen;
+    width: 320px;
+    padding: 10px;
+    border: 5px;
+    margin: 0;
+    border-style: dotted;
+    border-color: black;
+    border-width: medium;
+    border-radius: 24px;
+    font-family: sans-serif;
+}

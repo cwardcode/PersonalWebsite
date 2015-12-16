@@ -1,0 +1,151 @@
+<html>
+<head>
+<title>Project 3</title>
+<script>
+//Holds base pay
+var basePay = 0;
+//Holds base pay hours
+var basePayHours = 0;
+//Holds overtime pay
+var overtimePay = 0;
+//Holds overtime hours
+var overtimeHours = 0;
+
+/**
+ * Calculates pay, including overtime for various pay grades.
+ *
+ * return 0 - if all fields are entered correctly
+ * return 1 - if hours worked is null
+ * return 2 - if hours worked is not a number
+ * return 3 - if hours are negative
+ */
+function calcPay() {
+    //Get hours worked
+    var hoursWorked = document.getElementById("hoursWorked").value;
+    //Check for validation
+    if(hoursWorked == "" || hoursWorked == " ") {
+        return 1;
+    } else if(isNaN(hoursWorked)) { //Ensure hoursWorked is a number
+        return 2;
+    } else if (hoursWorked < 0) {   //Ensure hoursWorked is positive
+        return 3;
+    }
+    console.log("Hours Worked: " + hoursWorked);
+    //Get index for selection
+    var selectId = document.getElementById("employment").selectedIndex;
+    //Get selection text
+    var category = document.getElementById("employment").options[selectId].text;    
+    console.log("Category Selected: " + category);
+
+    //If hours are less than 40, use normal pay scheme
+    if(hoursWorked <= 40) {
+        basePayHours = hoursWorked;
+        if(category == "Manager") {
+            basePay = hoursWorked * 25;
+            console.log("Manager base pay: " + basePay);
+        } else if(category == "Sales Rep") {
+            basePay = hoursWorked * 20;
+            console.log("Sales Rep base pay: " + basePay);
+        } else {
+            basePay = hoursWorked * 15;
+            console.log("Staff base pay: " + basePay);
+        }
+    } else { //Same as above, but calculate overtime if necessary
+        basePayHours = 40;
+        overtimeHours = hoursWorked - 40;
+        if(category == "Sales Rep") {
+            basePay = basePayHours * 20;
+            overtimePay = overtimeHours * 1.5 * 20;
+            console.log("Sales Rep base pay: " + basePay);
+            console.log("Overtime Pay: " + overtimePay); 
+        } else if(category == "Staff") {
+            basePay = basePayHours * 15;
+            overtimePay = overtimeHours * 1.5 * 15;
+            console.log("Staff base pay: " + basePay);
+            console.log("Overtime Pay: " + overtimePay); 
+        } else if(category == "Manager") {
+            basePayHours = 40;
+            basePay = basePayHours * 25;
+            overtimeHours = 0;
+            console.log("Manager base pay: " + basePay);
+            console.log("Overtime Pay: " + overtimePay); 
+        }
+    }
+    //Calculate total amount to pay
+    var totalPay = basePay + overtimePay;
+    console.log("Total Pay: " + totalPay);
+
+    document.getElementById("basePayHours").innerHTML   = basePayHours;
+    document.getElementById("overtimeHours").innerHTML  = overtimeHours;
+    document.getElementById("basePayAmount").innerHTML  = "$" + basePay.toFixed(2);
+    document.getElementById("overtimePayAmt").innerHTML = "$" + overtimePay.toFixed(2);
+    document.getElementById("totalPayAmount").innerHTML = "$" + totalPay.toFixed(2);
+}
+
+/**
+ * Validates the form, and prompts user with errors.
+ */
+function validateForm() {
+    var printRtn = calcPay();
+    switch(printRtn){
+        case 1:
+            alert("Please enter hours worked");
+            break;
+        case 2:
+            alert("Please ensure hours worked is a number");
+            break;
+        case 3: 
+            alert("Please ensure hours worked is not negative");
+            break;
+        default:
+            //By default do nothing.
+            break;
+    }
+}
+
+</script>
+</head>
+<body style="background-color: aliceblue; font-family: sans-serif;">
+<h1>Project 3</h1>
+<table>
+    <tr>
+        <td>Number of Hours Worked</td>
+        <td><input id="hoursWorked" type="text"></input></td>
+   </tr>
+    <tr>
+        <td>Employment Category</td>
+        <td><select id="employment" name="employment">
+                <option value="MGR">Manager</option>
+                <option value="SR">Sales Rep</option>
+                <option value="STF">Staff</option>
+            </select>
+        </td>
+   </tr>
+    <tr>
+        <td></td>
+        <td><button onclick="validateForm();">Calculate Pay</button></td>
+   </tr>
+    <tr>
+        <td>Hours Eligible for Base Pay</td>
+        <td><div id="basePayHours"/></td>
+   </tr>
+    <tr>
+        <td>Hours Eligible for Overtime Pay</td>
+        <td><div id="overtimeHours"/></td>
+   </tr>
+    <tr>
+        <td>Base Pay Amount</td>
+        <td><div id="basePayAmount"/></td>
+   </tr>
+    <tr>
+        <td>Overtime Pay Amount</td>
+        <td><div id="overtimePayAmt"/></td>
+   </tr>
+    <tr>
+        <td>Total Pay Amount</td>
+        <td><div id="totalPayAmount"/></td>
+   </tr>
+   </table>
+
+</body>
+</html>

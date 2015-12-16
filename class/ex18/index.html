@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js"></script>
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 100%;
+      }
+    </style>
+    <script>
+        var map;
+        var centerOfMap = {lat: 48.547678, lng: 7.974495};
+        var marker;
+        var zoomScale;
+
+        $(document).ready(function(){
+            $("#zoomIn").click(function(){
+                zoomScale = $("#zoomVal").val();
+                console.log("zoomin pressed, zoomscale is: " + zoomScale);
+                map.setZoom(+zoomScale);                     
+            });
+            initMap();
+         });     
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+              center: centerOfMap,
+              zoom: 18,
+              mapTypeId: google.maps.MapTypeId.SATELLITE
+            });
+            marker = new google.maps.Marker({
+              position:centerOfMap,
+              map: map,
+              title: 'Appenweier, Deutschland'
+            });
+        }
+    </script>
+  </head>
+  <body>
+    <b>Please enter desired zoom level:</b>
+    <input type="text" id="zoomVal"/>
+    <button id="zoomIn"> Zoom</button>
+    <div id="map"></div>
+  </body>
+</html>
+

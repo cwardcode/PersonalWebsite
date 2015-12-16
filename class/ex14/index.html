@@ -1,0 +1,177 @@
+<html>
+<head>
+<title>ex14</title>
+<style>
+body {
+    font-family: Verdana, Arial;
+}
+
+span.tableHeader > label {
+    display: inline-block;
+    float:left;
+    line-height:30px;
+    padding-left:10px;
+    color: white;
+}
+tr.tableHeader {
+    background-color: green;
+    color: white;
+}
+table.tableGroup, table.tableGroup > tr > td > table {
+    border-spacing: 0px;
+}
+table.tableGroup div.ui-datatable th > div > span >span.ui-header-text {
+    color: #808080;
+    font-size: 11px;
+}
+table.tableGroup td, table.tableGroup th {
+    padding: 0px;
+    border: 0px;
+}
+table {
+    border-spacing:0px;
+}
+#divDisplay {
+    margin: 0px;
+    padding: 15px;
+    background-color: #e5eecc;
+    border: solid 1px #c3c3c3;
+    font-family: Verdana;
+    font-size: large;
+}
+</style>
+<script>
+var curLat;
+var curLng;
+
+function getLoc() {
+    navigator.geolocation.getCurrentPosition(locationSuccess,
+            locationError,
+            {
+            enableHighAccuracy: true,
+            maximumAge: 5000
+            }
+            );
+}
+
+function locationError(error) {
+    console.log("Error getting coords");
+}
+
+function locationSuccess(positionObj) {
+    console.dir(positionObj);
+    curLat = positionObj.coords.latitude;
+    curLng = positionObj.coords.longitude;
+    document.getElementById("r1c1Data").innerHTML = curLat;
+    document.getElementById("r1c2Data").innerHTML = curLng;
+}
+// ---------------------------------------------------------------------------------------
+// name: displayCalculationResults
+// ---------------------------------------------------------------------------------------
+function displayCalculationResults() {
+
+    console.log("displayCalculationResults function called!");
+
+    //2. Get values
+    //Note: In this case we'll just hardcode the values --
+    // normally we would be retrieving them from text elements!
+
+    //PointOfInterest
+    var poiLatitude = document.getElementById("r2c1Data").value;
+    var poiLongitude = document.getElementById("r2c2Data").value;
+
+    //3. Do calculations
+    var distanceInMeters = calculateDistanceInMeters(curLat, curLng,
+            poiLatitude, poiLongitude);
+    console.log("distanceInMeters = " + distanceInMeters);
+
+    //4. Display results
+    var distFeet = (distanceInMeters.toFixed(2)*3.2808).toFixed(0);
+    var distStr;
+    if(distFeet < 5280) {
+        distStr = distFeet + " Feet";
+    } else {
+        distStr = (distFeet * 0.000189394).toFixed(0) + " Miles";
+    }
+
+    document.getElementById("distance").innerHTML = distStr;
+}
+
+// ---------------------------------------------------------------------------------------
+// name: calculateDistanceMeters
+// source: http://www.codecodex.com/wiki/Calculate_distance_between_two_points_on_a_globe
+// ---------------------------------------------------------------------------------------
+function calculateDistanceInMeters(parLat1, parLon1, parLat2, parLon2) {
+
+    console.log("calculateDistanceInMeters function called!");
+    console.log("parLat1 = " + parLat1);
+    console.log("parLon1 = " + parLon1);
+    console.log("parLat2 = " + parLat2);
+    console.log("parLon2 = " + parLon2);
+
+    var distanceInKiloMeters,
+        distanceInMeters;
+
+    var R = 6371; // km
+    var dLat = (parLat2 - parLat1) * Math.PI / 180;
+    var dLon = (parLon2 - parLon1) * Math.PI / 180;
+    var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(parLat1 * Math.PI / 180) * Math.cos(parLat2 * Math.PI / 180) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    var c = 2 * Math.asin(Math.sqrt(a));
+    distanceInKiloMeters = R * c;
+
+    distanceInMeters = distanceInKiloMeters * 1000;
+
+    return distanceInMeters;
+}
+
+</script>
+
+</head>
+<body onload="getLoc();">
+<div id="divDisplay">
+<table>
+    <tr class="tableheader">
+        <td><span class="tableheader"><label>Place</label></span></td>
+        <td><span class="tableheader"><label>Latitude</label></span></td>
+        <td><span class="tableheader"><label>Longitude</label></span></td>
+    </tr>
+    <tr>
+        <td>
+            <b>Current Location</b>
+        </td>
+        <td style="color:green">
+            <div id="r1c1Data">asdf</div>
+        </td>
+        <td style="color:green">
+            <div id="r1c2Data">fasd</div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <b>Other Location</b>
+        </td>
+        <td style="color:green">
+            <input type="text" id="r2c1Data"></input>
+        </td>
+        <td style="color:green">
+            <input type="text" id="r2c2Data"></input>
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>
+            <button onclick="displayCalculationResults();">Submit</button>
+        </td>
+        <td></td>
+    </tr>
+    <tr>
+        <td><b>Distance</b></td>
+        <td style="color:green"><div id="distance"></div></td>
+        <td></td>
+    </tr>
+</table>
+</div>
+</body>
+</html>

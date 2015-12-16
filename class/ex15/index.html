@@ -1,0 +1,133 @@
+
+<!DOCTYPE html> 
+<html>
+<head>
+    <title>Exercise 16: watchPosition</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        #distDisplay {
+            margin: 0px;
+            padding: 15px;
+            background-color: #CC3333;
+            /*border: solid 1px #c3c3c3;*/
+            font-family: Verdana;
+            font-size: large;
+        }
+        #divDisplay {
+            margin: 0px;
+            padding: 15px;
+            background-color: #e5eecc;
+            /*border: solid 1px #c3c3c3;*/
+            font-family: Verdana;
+            font-size: large;
+        }
+
+    </style>
+<script>
+
+    //-------------------------------------------------------------------------------
+    // Name: displayResults()
+    //-------------------------------------------------------------------------------
+    function displayResults() {
+
+        console.log("displayResults function called!");
+
+        //Call watchPosition() function to retrieve current position data
+        //This is an asynchronous call. 
+        //Once this is called once, it will keep calling 
+        //the cb_GetCurrentPosition_Success callback function every time you move
+        navigator.geolocation.watchPosition(cb_GetCurrentPosition_Success);
+    }
+
+    //-------------------------------------------------------------------------------
+    // Name:            cb_GetCurrentPosition_Success
+    // Description:     Callback function if GeoLocation info retrieved successfully
+    //-------------------------------------------------------------------------------
+    function cb_GetCurrentPosition_Success(positionObject) {
+
+        console.log("cb_GetCurrentPosition_Success callback function called!");
+        
+        //Show returned positionObject in Inspect Element Console
+        console.dir(positionObject);
+
+        //1. Declare variables 
+        var currentLat,
+            currentLong,
+            oldDisplayString,
+            displayString,
+            huntLat,
+            huntLng,
+            huntDist;
+
+        //2. Get values
+
+        huntLat = 35.313316;
+        huntLng = -83.179788;
+        //Extract geolocation data from returned object
+        currentLat = positionObject.coords.latitude;          
+        currentLong = positionObject.coords.longitude;
+        console.log("currentLat = " + currentLat);
+        console.log("currentLong = " + currentLong);
+     
+        //3. Do calculations
+        huntDist = calculateDistanceInMeters(currentLat, currentLong, huntLat, huntLng) * 3.28;  
+        
+        //4. Display results
+        displayString = "Current Latitude = " + currentLat + "<br />" +
+                        "Current Longitude = " + currentLong;
+        var distDisplayString = "You are <green>" + huntDist.toFixed(0) + "</green> feet from Hunter Library.";
+
+        //Display retrieved Geolocation data
+        document.getElementById("divDisplay").innerHTML = displayString;
+        document.getElementById("distDisplay").innerHTML = distDisplayString;
+    }
+
+    // ---------------------------------------------------------------------------------------
+    // name: calculateDistanceMeters
+    // source: http://www.codecodex.com/wiki/Calculate_distance_between_two_points_on_a_globe
+    // ---------------------------------------------------------------------------------------
+    function calculateDistanceInMeters(parLat1, parLon1, parLat2, parLon2) {
+
+        console.log("calculateDistanceInMeters function called!");
+        console.log("parLat1 = " + parLat1);
+        console.log("parLon1 = " + parLon1);
+        console.log("parLat2 = " + parLat2);
+        console.log("parLon2 = " + parLon2);
+
+        var distanceInKiloMeters,
+            distanceInMeters;
+
+        var R = 6371; // km
+        var dLat = (parLat2 - parLat1) * Math.PI / 180;
+        var dLon = (parLon2 - parLon1) * Math.PI / 180;
+        var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(parLat1 * Math.PI / 180) * Math.cos(parLat2 * Math.PI / 180) *
+            Math.sin(dLon / 2) * Math.sin(dLon / 2);
+        var c = 2 * Math.asin(Math.sqrt(a));
+        distanceInKiloMeters = R * c;
+
+        distanceInMeters = distanceInKiloMeters * 1000;
+
+        return distanceInMeters;
+    }
+
+</script>
+</head>
+<body>
+
+<h1>Activity 18: watchPosition</h1>
+
+<input type="button" id="butStart" 
+       value="Start watchPosition"
+       onclick="displayResults()" /> 
+
+<div id="distDisplay"></div>
+<div id="divDisplay"></div>
+
+</body>
+</html>
+

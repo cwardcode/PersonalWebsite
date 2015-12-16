@@ -12,9 +12,26 @@
 <!-- Plotly.js -->
 <script src="https://d14fo0winaifog.cloudfront.net/plotly-basic.js"></script>
 <script>
+    //Holds number of CSV calls ran
+    var getCSVCalls = 0;
+    //Holds average of level 1 points
+    var avgLevel1 = 0;
+    //Holds average of level 2 points
+    var avgLevel2 = 0;
+    //Holds average of level 3 points
+    var avgLevel3 = [];
+    //Holds overall average depth
+    var averageDepth = [];
+    //Holds raw data from InSitu
     var rawData;
+    //Holds cleaned data from InSitu for plotting
     var cleanData;
+    //Holds elements to be removed from site
     var editElements;
+    //Holds elevation change from starting point for cross-section in Meters
+    var crossHeight = [0,0.032,0.107,0.615,0.6,0.675,0.686,0.643,0.598,0.669,0.675,0.665,0.65,0.62,0.589,0.56,0.483,0.448,0.372,0.303,0.223,0.21,0.21,0.21];
+    //Holds distances between cross-section height measurements
+    var crossWidth = [0,0.5,1,1.5,2,2.5,3,3.5,4,4.5,5,5.5,6,6.5,7,7.5,8,8.5,9,9.5,10,10.5,11,11.8];
     /**
      * Function to download data from plot. Copies data from plot function, then
      * encodes it and downloads csv.
@@ -38,23 +55,35 @@
      * @return lines The data we requested 
      */
     function getCSVData(data, dataColm) {
+        //Hold sum of values for data
+        var sumValue = 0;
+        //Holds count of objects 
+        var countValue = 0;
+        //Hold average value for data
+        var averageValue = 0;
         //Remove formatting
         var dataLines = data.split(/\r\n|\n/);
         //Store file headers
         var headers = dataLines[0].split(',');
         //Holds our return array containing requested data
         var lines = [];
-        
+        //Holds actual number of data points for set of dat
+        var cnt = 0;
         for (var i=1; i<dataLines.length; i++) {
             //Split CSV data into lines
             var fullData = dataLines[i].split(',');
             if (fullData.length == headers.length) {
                 var dataString = "";
-                for (var j=0; j<headers.length; j++) {
+                for (var j = 0; j<headers.length; j++) {
                     // Check to see if we are in requested header
                     if(headers[j] == dataColm && dataColm == "time") {
                         //Remove date from datetime field, build string
                         dataString += fullData[j].substring(11) + " ";
+                    } else if(headers[j] == dataColm && dataColm == "level (meter)") {
+                        //Build string with data in field
+                        dataString += fullData[j] + ", ";
+                        sumValue += Number(fullData[j]);
+                        countValue = i;
                     } else if(headers[j] == dataColm) {
                         //Build string with data in field
                         dataString += fullData[j] + ", ";
@@ -63,6 +92,27 @@
             }
             //Add data to return array
             lines.push(dataString);
+        }
+
+        if (dataColm == "level (meter)") {
+            cnt = lines.length-2;
+            //Average data values
+            averageValue = sumValue / countValue;
+                averageDepth = [];
+            for(var k=0; k < cnt; k++) {
+                averageDepth.push(averageValue);
+            }
+            if(getCSVCalls == 0) {
+                avgLevel1 = averageDepth;
+            } else if(getCSVCalls == 1) {
+                avgLevel2 = averageDepth;
+            } else if(getCSVCalls == 2) {
+                for(var l=0; l < cnt; l++) {
+                    avgLevel3.push((avgLevel1[0] + avgLevel2[1] + averageValue) / 3);
+                }
+            }  
+            getCSVCalls++;
+            console.log("Data Column: " + dataColm + " SumValue: " + sumValue + " countValue: " + countValue + " Average: " + averageValue);
         }
         //Return data
         return lines;
@@ -73,6 +123,7 @@
      */
     function getData(){                                                             
         //Get current date
+
         currentTime = new Date().getTime() / 1000;
         //Round current date to seconds
         currentTime = currentTime.toFixed(0);
@@ -111,6 +162,16 @@
                 lb3Pres = getCSVData(lb3Data,"pressure (psi)");
 
                 lbBaroData = data2[4].substring(8);
+
+                //Set up LB Cross-section trace for plot
+                var lbCrossTrace = {
+                    x: crossWidth,
+                    y: crossHeight,
+                    xaxis: 'x2',
+                    type: 'scatter',
+                    name:'Long Branch Cross-section'
+
+                };
                 //Set up LB1 Temperature trace for plot
                 var lb1TempTrace = {
                     x: timeseries,
@@ -180,6 +241,14 @@
                     type: 'scatter',
                     name:'Well 3 Pressure' 
                 };
+                //Set Average Level trace for plot
+                var lbAvgTrace = {
+                    x: timeseries,
+                    y: avgLevel3,
+                    yaxis: 'y2',
+                    type: 'scatter',
+                    name:'Water level Average'
+                };
                 //Set up layout for chart
                 var layout = {
                   title:'Temperatures at Long Branch',
@@ -195,6 +264,8 @@
                 var plotTempData = [lb1TempTrace, lb2TempTrace, lb3TempTrace];
                 var plotLevelData = [lb1LevelTrace, lb2LevelTrace, lb3LevelTrace];
                 var plotPresData = [lb1PresTrace, lb2PresTrace, lb3PresTrace];
+                var plotCrossData = [lb1LevelTrace, lb2LevelTrace, lb3LevelTrace];
+                var plotAvgCrossData = [lbCrossTrace, lbAvgTrace];//lb2LevelTrace, lb3LevelTrace];
 
                 //Create plot and set div for it to load into
                 Plotly.newPlot('tempDiv', plotTempData, layout);
@@ -226,6 +297,44 @@
 
                 //Plot pressure
                 Plotly.newPlot('pressureDiv', plotPresData, layout);
+
+                //Setup stage layout
+                layout = {
+                    title: 'Water levels at Longbranch Based on Well',
+                    xaxis: {
+                        title: 'Time'
+                    },
+                    yaxis: {
+                        title: 'Depth (m)',
+                    },
+                };
+
+                //Plot stage   
+                Plotly.newPlot('stageDiv', plotCrossData, layout);
+
+                //Setup average stage layout
+                layout = {
+                    title: 'Longbranch Stage Level Average',
+                    xaxis: {
+                        title: 'Time'
+                    },
+                    xaxis2: {
+                        showticklabels: false,
+                        side: 'top',
+                        overlaying: 'x'                     },
+                    yaxis: {
+                        title: 'Depth (m)',
+                        autorange: 'reversed'
+                    },
+                    yaxis2: {
+                        title: 'Water Depth (m)',
+                        side: 'right',
+                        overlaying: 'y'
+                    }
+                };
+
+                //Plot average stage   
+                Plotly.newPlot('avgStageDiv', plotAvgCrossData, layout);
                 //Get elements that have "edit" link to plotly
                 editElements = document.getElementsByClassName("js-plot-link-container");
                 //Loop through elements, make them invisible
@@ -241,6 +350,10 @@
 </head>
 <body>
 <button onclick="downloadData();">Download Data</button>
+<div id="avgStageDiv">
+</div>
+<div id="stageDiv">
+</div>
 <div id="tempDiv">
 </div>
 <div id="levelDiv">

@@ -1,0 +1,62 @@
+<html>
+<head>
+<title>Arrays</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+        fillArrayOfNumbers();
+        $("#annSalesBtn").click(function(){
+            displayAnnualSales();                     
+        });
+        $("#avgSalesBtn").click(function(){
+            displayAverageSales();                     
+        });
+    });   
+var monthlySales;
+function fillArrayOfNumbers() {
+    console.log("fillArrayOfNumbers function called!");
+    monthlySales = [ 30000, 10000, 15000, 20000, 20000,25000,22000,80000,20000,20000,40000,60000];
+    console.log(monthlySales);
+}
+
+function displayAnnualSales() {
+    console.log("displayAnnualSales function called!");
+    var annualSales;
+    annualSales = eval(monthlySales.join('+'));
+    console.log("annualSales = " + annualSales);
+    document.getElementById("annSalesDiv").innerHTML = "$" + annualSales.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return annualSales;
+}
+
+function displayAverageSales() {
+    console.log("displayAverageSales function called!");
+    var sales = displayAnnualSales();
+    var averageSales = (sales / monthlySales.length);
+    console.log("averageSales = " + averageSales);
+    document.getElementById("avgSalesDiv").innerHTML = "$" + averageSales.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return averageSales;
+}
+</script>
+</head>
+<body>
+<table>
+    <tr>
+        <td>
+            <button id="annSalesBtn">Calculate Annual Sales</button>
+        </td>
+        <td>
+            <div id="annSalesDiv"></div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <button id="avgSalesBtn">Calculate Average Sales</button>
+        </td>
+        <td>
+            <div id="avgSalesDiv"></div>
+        </td>
+    </tr>
+    <table>
+</body>
+</html>
+

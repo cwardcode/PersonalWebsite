@@ -1,0 +1,53 @@
+<html>
+<head>
+<title>a_DistanceCalculation</title>
+<style>
+body {
+    font-family: Verdana, Arial;
+}
+
+#divDisplay {
+    margin: 0px;
+    padding: 15px;
+    background-color: #e5eecc;
+    border: solid 1px #c3c3c3;
+    font-family: Verdana;
+    font-size: large;
+}
+</style>
+<script>
+    //Create objects
+    var hunterLibraryPOI = {
+        title:"Hunter Library",
+        latitude:"35.313316",
+        longitude:"-83.179788"
+    };
+
+    var hfrPOI = {
+        title:"HFR Building",
+        latitude:"35.308959",
+        longitude:"-83.186385"
+    };
+
+    var dillsboroPOI = {
+        title:"Downtown Dillsboro",
+        latitude:"35.336949",
+        longitude:"-83.252764"
+    };
+    function displayLocations() {
+        var locString = "<b>" + hunterLibraryPOI.title + "</b><br/>Latitude: " +
+            hunterLibraryPOI.latitude + "<br/>Longitude: " + 
+            hunterLibraryPOI.longitude + "<br>" + "<br><b>" + hfrPOI.title + "</b><br/>Latitude: " +
+            hfrPOI.latitude + "<br/>Longitude: " + 
+            hfrPOI.longitude + "<br>" + "<br><b>" + dillsboroPOI.title + "</b><br/>Latitude: " +
+            dillsboroPOI.latitude + "<br/>Longitude: " + dillsboroPOI.longitude;
+            
+        document.getElementById("divDisplay").innerHTML = locString;
+    }
+</script>
+
+</head>
+<body onLoad="displayLocations()">
+<div id="divDisplay"></div>
+</body>
+</html>

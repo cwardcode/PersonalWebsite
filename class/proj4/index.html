@@ -1,0 +1,223 @@
+<html>
+<head>
+<title>Project 4</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<style>
+body {
+    font-family: Verdana, Arial;
+    background-color: #E6A9EC;
+}
+
+span.tableHeader > label {
+    display: inline-block;
+    float:left;
+    line-height:30px;
+    padding-left:10px;
+    color: white;
+}
+tr.tableHeader {
+    background-color: black;
+    color: white;
+}
+table.tableGroup, table.tableGroup > tr > td > table {
+    border-spacing: 0px;
+}
+table.tableGroup div.ui-datatable th > div > span >span.ui-header-text {
+    color: black;
+    font-size: 11px;
+}
+table.tableGroup td, table.tableGroup th {
+    padding: 0px;
+    border: 1px;
+}
+table {
+    border-spacing:0px;
+}
+#divDisplayResults {
+    margin: 0px;
+    padding: 15px;
+    background-color: #E6A9EC;
+    border: solid 1px #E6A9EC;
+    font-family: Verdana;
+    font-size: large;
+}
+#divDisplay {
+    margin: 0px;
+    padding: 15px;
+    background-color: #E6A9EC;
+    border: solid 1px #E6A9EC;
+    font-family: Verdana;
+    font-size: large;
+}
+</style>
+<script>
+/**
+ * Allows user to get current location, and see which of two points are closer.
+ *
+ * @author Chris Ward
+ * @version 11.16.2015
+ */
+// Set up document on load.
+$(document).ready(function(){
+        $("#divDisplayResults").hide();
+        $("#getDistBtn").click(function(){
+            getLoc();                     
+        });
+        $("#calcDistBtn").click(function(){
+            displayCalculationResults();                     
+        });
+    });   
+var curLat, curLng;
+
+/**
+ * Returns current location of user based on browser's location sensors
+ */
+function getLoc() {
+    navigator.geolocation.getCurrentPosition(locationSuccess, locationError, {
+        enableHighAccuracy: true,
+        maximumAge: 5000
+    });
+}
+/**
+ * Callback function for getLoc(), is ran when the location could not be obtained
+ */
+function locationError(error) {
+    console.log("Error getting coords");
+}
+/**
+ * Callback function for getLoc(), is ran when the location can be obtained
+ * Sets the current latitude and longitude for further operations
+ */
+function locationSuccess(positionObj) {
+    console.dir(positionObj);
+    curLat = positionObj.coords.latitude;
+    curLng = positionObj.coords.longitude;
+    $("#r1c1Data").html(curLat.toFixed(6));
+    $("#r1c2Data").html(curLng.toFixed(6));
+    $("#divDisplayResults").slideDown();
+}
+/**
+ Used to calclate distance between user's current location and two points, 
+ in this case the baseball field tennis courts at western carolina university
+*/
+function displayCalculationResults() {
+
+    console.log("displayCalculationResults function called!");
+
+    var baseballLatitude = 35.301411;
+    var baseballLongitude = -83.181315;
+    
+    var tcLatitude = 35.311894;
+    var tcLongitude = -83.185387;
+
+    var bballDistanceInMeters = calculateDistanceInMeters(curLat, curLng,
+            baseballLatitude, baseballLongitude);
+    console.log("bballDistanceInMeters = " + bballDistanceInMeters);
+
+    var tcourtDistanceInMeters = calculateDistanceInMeters(curLat, curLng,
+            tcLatitude, tcLongitude);
+    console.log("tcourtDistanceInMeters = " + tcourtDistanceInMeters);
+
+    var bballDistFeet = (bballDistanceInMeters*3.2808).toFixed(0);
+    var tcourtDistFeet = (tcourtDistanceInMeters*3.2808).toFixed(0);
+
+    if(bballDistFeet < tcourtDistFeet) {
+        outString = "You are currently closer to the Baseball Field!";
+    } else {
+        outString = "You are currently closer to the Tennis Courts!";
+    }
+
+    $("#bbDist").html(bballDistFeet + " Feet");
+    $("#tcDist").html(tcourtDistFeet + " Feet");
+    $("#closeDist").html(outString);
+}
+
+/**
+ * Converts distance between two sets of coordinates. This is an implementation of the 
+ * haversine function.
+ * @return distance in meters between the two points
+ * source: http://www.codecodex.com/wiki/Calculate_distance_between_two_points_on_a_globe
+ */
+function calculateDistanceInMeters(parLat1, parLon1, parLat2, parLon2) {
+
+    console.log("calculateDistanceInMeters function called!");
+    console.log("parLat1 = " + parLat1);
+    console.log("parLon1 = " + parLon1);
+    console.log("parLat2 = " + parLat2);
+    console.log("parLon2 = " + parLon2);
+
+    var distanceInKiloMeters,
+        distanceInMeters;
+
+    var R = 6371; // km
+    var dLat = (parLat2 - parLat1) * Math.PI / 180;
+    var dLon = (parLon2 - parLon1) * Math.PI / 180;
+    var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(parLat1 * Math.PI / 180) * Math.cos(parLat2 * Math.PI / 180) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    var c = 2 * Math.asin(Math.sqrt(a));
+    distanceInKiloMeters = R * c;
+
+    distanceInMeters = distanceInKiloMeters * 1000;
+
+    return distanceInMeters;
+}
+
+</script>
+
+</head>
+<body>
+<center><h1>Project 4</h1>
+<div id="divDisplay">
+    <table frame="box" rules="none">
+        <tr class="tableheader">
+            <td><span class="tableheader"><label><b>Place</b></label></span></td>
+            <td><span class="tableheader"><label><b>Latitude</b></label></span></td>
+            <td><span class="tableheader"><label><b>Longitude</b></label></span></td>
+        </tr>
+        <tr>
+            <td>
+                <b>Current Location</b>
+            </td>
+            <td>
+                <b><div id="r1c1Data"></div></b>
+            </td>
+            <td>
+                <b><div id="r1c2Data"></div></b>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <button id="getDistBtn">Show Current Location</button>
+            </td>
+            <td></td>
+        </tr>
+    </table>
+</div>
+
+<div id="divDisplayResults">
+    <table frame="box" rules="none">
+        <tr>
+            <td><b>Distance to<br/> Baseball Field</b></td>
+            <td><b><div id="bbDist"></div></b></td>
+        </tr>
+        <tr>
+            <td><b>Distance to<br/> Tennis Courts</b></td>
+            <td><b><div id="tcDist"></div></b></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><b><div id="closeDist"></div></b></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <button id="calcDistBtn">Calculate Distance</button>
+            </td>
+        </tr>
+    </table>
+</div>
+</center>
+</body>
+</html>
