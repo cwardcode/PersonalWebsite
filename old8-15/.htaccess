@@ -1,0 +1,2 @@
+#301 Redirect Old File
+Redirectmatch 301 index.html http://cwardcode.com

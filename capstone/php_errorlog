@@ -1,0 +1,4 @@
+[24-Jul-2013 20:29:34 CST6CDT] PHP Fatal error:  Call to undefined function domxml_new_doc() in /home/cdward4/public_html/capstone/genxml.php on line 5
+[24-Jul-2013 20:31:13 CST6CDT] PHP Fatal error:  Call to undefined function domxml_new_doc() in /home/cdward4/public_html/capstone/genxml.php on line 5
+[24-Jul-2013 20:31:22 CST6CDT] PHP Fatal error:  Call to undefined function domxml_new_doc() in /home/cdward4/public_html/capstone/genxml.php on line 5
+[24-Jul-2013 20:36:08 CST6CDT] PHP Fatal error:  require(): Failed opening required 'phpsqlajax_dbinfo.php' (include_path='.:/usr/local/php54/pear') in /home/cdward4/public_html/capstone/genxml.php on line 2
